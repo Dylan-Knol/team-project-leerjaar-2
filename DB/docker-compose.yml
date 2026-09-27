@@ -13,6 +13,7 @@ services:
     image: mariadb:latest
     environment:
       MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_DATABASE: "userdata"
       MYSQL_USER: "student"
       MYSQL_PASSWORD: "veiligwachtwoord"
     volumes:
