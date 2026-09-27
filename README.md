@@ -1,1 +1,4 @@
 # team-project-leerjaar-2
+
+
+COPY PASTE THE INIT.SQL IN TO THE SQL TAB OF PHPMYADMIN
