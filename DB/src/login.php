@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if ($row && password_verify($_POST['password'], $row['password'])) {
     $_SESSION['ingelogd'] = true;
-    header("Location: overview.php");
+    header("Location: saving_overview.php");
     exit();
   } else {
     $error = "Combinatie van gebruikersnaam en wachtwoord klopt niet.";
