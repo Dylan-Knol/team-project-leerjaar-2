@@ -1,5 +1,13 @@
 <?php
 session_start();
+
+// ==========================================================
+// REDIRECT NA INLOGGEN - pas hier de bestemmingspagina's aan
+// ==========================================================
+$redirectAdmin = "saving_overview.php";     // gebruikers met rol 'admin'
+$redirectGebruiker = "goals.php";     // gebruikers met rol 'gebruiker'
+// ==========================================================
+
 $error = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -13,8 +21,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $stmt->close();
 
   if ($row && password_verify($_POST['password'], $row['password'])) {
+    session_regenerate_id(true);
     $_SESSION['ingelogd'] = true;
-    header("Location: saving_overview.php");
+    $_SESSION['user_id'] = (int) $row['id'];
+    $_SESSION['rol'] = $row['rol'];
+    // Doorsturen op basis van rol (pagina's staan bovenaan dit bestand)
+    if ($row['rol'] === 'admin') {
+      header("Location: " . $redirectAdmin);
+    } else {
+      header("Location: " . $redirectGebruiker);
+    }
     exit();
   } else {
     $error = "Combinatie van gebruikersnaam en wachtwoord klopt niet.";
