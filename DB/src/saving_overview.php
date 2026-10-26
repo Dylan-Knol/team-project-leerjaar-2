@@ -39,14 +39,14 @@
       </div>
       <ul class="goal-list" id="home-goals"></ul>
 
-      <a class="btn-outline" href="new-goal.php">+ New savings goal</a>
+      <a class="btn-outline" href="createsaving.php">+ New savings goal</a>
     </div>
 
   </main>
 
   <nav class="tabbar pad">
     <a class="tab" href="saving_overview.php" aria-current>🏠<br>Home</a>
-    <a class="tab" href="goals.php">🎯<br>Goals</a>
+    <a class="tab" href="goal.php">🎯<br>Goals</a>
     <a class="tab" href="profile.php">👤<br>Profile</a>
   </nav>
 </div>

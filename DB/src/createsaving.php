@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute();
     $stmt->close();
 
-    header("Location: overview.php?goal_created=1");
+    header("Location: saving_overview.php");
     exit();
   }
 }
