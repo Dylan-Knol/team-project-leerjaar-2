@@ -4,7 +4,7 @@ session_start();
 // ==========================================================
 // REDIRECT NA INLOGGEN - pas hier de bestemmingspagina's aan
 // ==========================================================
-$redirectAdmin = "saving_overview.php";     // gebruikers met rol 'admin'
+$redirectAdmin = "overview.php";     // gebruikers met rol 'admin'
 $redirectGebruiker = "goal.php";     // gebruikers met rol 'gebruiker'
 // ==========================================================
 
