@@ -29,7 +29,7 @@ if ($id <= 0 && isset($_SESSION['user_id'])) {
 }
 
 if ($id <= 0) {
-  header("Location: goals.php");
+  header("Location: login.php");
   exit();
 }
 
@@ -140,175 +140,7 @@ $iconPath = $icons[$goal['category_icon']] ?? $icons['star'];
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo htmlspecialchars($goal['name']); ?></title>
   <style>
-    :root {
-      --bg: #f3f3ee;
-      --card: #ffffff;
-      --ink: #1d1d1a;
-      --muted: #8a8a82;
-      --lime: #c9f560;
-      --line: #e6e6df;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: "Inter", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
-    }
-
-    .screen {
-      max-width: 420px;
-      margin: 0 auto;
-      padding: 24px 22px 40px;
-    }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-weight: 600;
-      font-size: 16px;
-    }
-
-    .circle-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--card);
-      border: 1px solid var(--line);
-      display: grid;
-      place-items: center;
-      color: var(--ink);
-      text-decoration: none;
-    }
-
-    .circle-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-    .hero { text-align: center; margin-top: 28px; }
-
-    .goal-icon {
-      width: 68px;
-      height: 68px;
-      margin: 0 auto;
-      border-radius: 22px;
-      background: var(--lime);
-      display: grid;
-      place-items: center;
-    }
-
-    .goal-icon svg { width: 30px; height: 30px; fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-
-    h1 { font-size: 32px; margin: 18px 0 8px; letter-spacing: -0.5px; }
-
-    .target { color: var(--muted); font-size: 15px; margin: 0; }
-
-    .card {
-      background: var(--card);
-      border-radius: 24px;
-      padding: 22px;
-      margin-top: 24px;
-    }
-
-    .amounts { display: flex; align-items: baseline; justify-content: space-between; }
-    .saved { font-size: 38px; font-weight: 700; letter-spacing: -1px; }
-    .of { color: var(--muted); font-size: 15px; }
-
-    .bar { height: 8px; border-radius: 99px; background: #d9d9d3; margin: 14px 0 12px; overflow: hidden; }
-    .bar span { display: block; height: 100%; background: var(--ink); border-radius: 99px; }
-
-    .bar-labels { display: flex; justify-content: space-between; font-size: 13px; }
-    .bar-labels b { font-weight: 700; }
-    .bar-labels span { color: var(--muted); }
-
-    details.add { margin-top: 18px; }
-
-    details.add summary {
-      list-style: none;
-      cursor: pointer;
-      background: var(--lime);
-      border-radius: 99px;
-      padding: 18px;
-      text-align: center;
-      font-weight: 700;
-      font-size: 17px;
-    }
-
-    details.add summary::-webkit-details-marker { display: none; }
-
-    details.add form {
-      display: flex;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    details.add input[type="number"] {
-      flex: 1;
-      min-width: 0;
-      padding: 14px 16px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      font-size: 16px;
-      font-family: inherit;
-    }
-
-    details.add button {
-      background: var(--ink);
-      color: #fff;
-      border: 0;
-      border-radius: 16px;
-      padding: 0 22px;
-      font-weight: 600;
-      font-size: 15px;
-      font-family: inherit;
-      cursor: pointer;
-    }
-
-    .error { color: #b3261e; font-size: 14px; margin: 10px 4px 0; }
-
-    .status {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: var(--ink);
-      color: #fff;
-      border-radius: 20px;
-      padding: 18px;
-      margin-top: 16px;
-    }
-
-    .status .dot { width: 38px; height: 38px; border-radius: 50%; background: var(--lime); flex: none; }
-    .status.late .dot { background: #ffb37a; }
-    .status strong { display: block; font-size: 15px; }
-    .status small { color: #b9b9b1; font-size: 13px; }
-    .status .chev { margin-left: auto; color: #b9b9b1; }
-
-    h2 { font-size: 20px; margin: 30px 0 14px; }
-
-    .activity { background: var(--card); border-radius: 20px; overflow: hidden; }
-
-    .row {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 16px 18px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .row:last-child { border-bottom: 0; }
-    .row .avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); flex: none; }
-    .row .info { flex: 1; }
-    .row .info strong { display: block; font-size: 15px; }
-    .row .info small { color: var(--muted); font-size: 13px; }
-    .row .plus { font-weight: 700; font-size: 15px; }
-
-    .empty { padding: 22px; color: var(--muted); font-size: 14px; text-align: center; }
-
-    .circle-btn:focus-visible, summary:focus-visible, button:focus-visible, input:focus-visible {
-      outline: 3px solid var(--ink);
-      outline-offset: 2px;
-    }
+    <?php include "password.css"; ?>
   </style>
 </head>
 
@@ -316,7 +148,7 @@ $iconPath = $icons[$goal['category_icon']] ?? $icons['star'];
   <div class="screen">
 
     <div class="topbar">
-      <a class="circle-btn" href="goals.php" aria-label="Back">
+      <a class="circle-btn" href="saving_overview.php" aria-label="Back">
         <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></svg>
       </a>
       <span>Goal details</span>
